@@ -15,11 +15,6 @@ namespace TravelTripProject.Controllers
             var values = c.Blogs.Take(4).ToList();
             return View(values);
         }
-        public ActionResult About()
-        {
-
-            return View();
-        }
         public PartialViewResult partial1()
         {
             var values = c.Blogs.OrderByDescending(x => x.ID).Take(2).ToList();
@@ -32,7 +27,7 @@ namespace TravelTripProject.Controllers
         }
         public PartialViewResult partial3()
         {
-            var value = c.Blogs.ToList();
+            var value = c.Blogs.Take(10).ToList();
             return PartialView(value);
         }
         public PartialViewResult partial4()

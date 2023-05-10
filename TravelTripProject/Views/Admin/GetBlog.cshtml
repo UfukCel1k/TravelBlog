@@ -7,7 +7,7 @@
 
 <h2>Blog Güncelleme Sayfası</h2>
 <br />
-@using (Html.BeginForm("BlogGuncell", "Admin", FormMethod.Post))
+@using (Html.BeginForm("UpdateBlog", "Admin", FormMethod.Post))
 {
     @Html.LabelFor(x => x.Heading)
     @Html.TextBoxFor(x => x.Heading, new { @class = "form-control" })

@@ -4,32 +4,49 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using TravelTripProject.Models.Classes;
 
 namespace TravelTripProject.Controllers
 {
-    public class BlogController : Controller
-    {
+	public class BlogController : Controller
+	{
 
-        Context c = new Context();
-        BlogComment bc = new BlogComment();
+		Context c = new Context();
+		BlogComment bc = new BlogComment();
 
-        public ActionResult Index()
-        {
-            //var blogs = c.Blogs.ToList();
-            bc.value1 = c.Blogs.ToList();
-            bc.value3 = c.Blogs.OrderByDescending(x => x.ID).Take(3).ToList();
-            return View(bc);
-        }
+		public ActionResult Index()
+		{
+			//var blogs = c.Blogs.ToList();
+			bc.value1 = c.Blogs.ToList();
+			bc.value3 = c.Blogs.OrderByDescending(x => x.ID).Take(3).ToList();
+			return View(bc);
+		}
 
 
-        public ActionResult BlogDetail(int id) 
-        {
+		public ActionResult BlogDetail(int id)
+		{
 
-            //var SearchBlog = c.Blogs.Where(x => x.ID == id).ToList();
-            bc.value1 = c.Blogs.Where(x => x.ID == id).ToList();
-            bc.value2 = c.Commentss.Where(x => x.BlogID == id).ToList();
-            return View(bc);
-        }
-    }
+			//var SearchBlog = c.Blogs.Where(x => x.ID == id).ToList();
+			bc.value1 = c.Blogs.Where(x => x.ID == id).ToList();
+			bc.value2 = c.Commentss.Where(x => x.BlogID == id).ToList();
+			return View(bc);
+		}
+
+		[HttpGet]
+		public PartialViewResult MakeComment(int id)
+		{
+			ViewBag.deger = id;
+			return PartialView();
+		}
+		[HttpPost]
+		public PartialViewResult MakeComment(Comments b)
+		{
+			c.Commentss.Add(b);
+			c.SaveChanges();
+			return PartialView();
+		}
+
+	}
 }
+
